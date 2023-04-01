@@ -4,8 +4,8 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 def get_author_keyboard():
     buttons = [
-        [InlineKeyboardButton(text="@vsecoder", url="tg://user?id=1218845111")],
-        [InlineKeyboardButton(text="@sleroq", url="tg://user?id=308552322")],
+        [InlineKeyboardButton(text="@vsecoder", url="https://t.me/vsecoder")],
+        [InlineKeyboardButton(text="@sleroq", url="https://t.me/sleroq")],
     ]
     keyboard = InlineKeyboardBuilder(markup=buttons)
     return keyboard.as_markup()
