@@ -3,6 +3,7 @@ from aiogram.types import BotCommand, BotCommandScopeDefault
 
 
 users_commands = {
+    "start": "Обновить меню",
     "help": "Показать список команд",
     "about": "Показать информацию о боте",
 }

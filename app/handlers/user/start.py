@@ -2,7 +2,7 @@ from aiogram import Bot, Router
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 
-from app.db.functions import User
+from app.db.functions import User, _
 from app.keyboards.inline import get_start_keyboard
 from app.keyboards.reply import main_menu
 
@@ -23,14 +23,7 @@ async def cmd_start(message: Message, bot: Bot):
             refer=args[1] if len(args) > 1 else 0,
             name=message.from_user.full_name,
         )
-        try:
-            await bot.send_message(
-                args[1],
-                f"🍅 <a href='tg://user?id={user_id}'>{message.from_user.full_name}</a> заражён(-а) вами!",
-                parse_mode="HTML"
-            )
-        except:
-            pass
+
 
     if await User.is_confirmed(user_id):
         kb = await main_menu()
