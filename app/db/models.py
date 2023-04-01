@@ -20,8 +20,6 @@ class User(Model):
 
     confirmed = fields.BooleanField(default=False)
 
-    # status
-    # user, admin, sponsor, developer
     status = fields.CharField(max_length=255, default="user")
     is_banned = fields.BooleanField(default=False)
 
