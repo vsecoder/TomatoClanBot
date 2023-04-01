@@ -19,10 +19,10 @@ class User(models.User):
 
     @classmethod
     async def register(
-        cls, 
-        telegram_id, 
-        refer: int = 0, 
-        status: str = "user", 
+        cls,
+        telegram_id,
+        refer: int = 0,
+        status: str = "user",
         name: str = "Unknown"
     ):
         referal_level = 1
