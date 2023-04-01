@@ -75,7 +75,7 @@ async def main():
 
     session = AiohttpSession(
         api=TelegramAPIServer.from_base(
-            "https://api.telegram.org", 
+            "https://api.telegram.org",
             is_local=False
         )
     )

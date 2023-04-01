@@ -18,7 +18,8 @@ async def text_handler(message: Message, bot: Bot):
         text += f" - Вы заразили: <b>{len(user.referrals)}</b>\n"
         text += f" - Вас заразили: <a href='tg://user?id={user.refer}'>{refer.name}</a>\n"
         text += f" - Всего заражено: <b>{await User.get_count()}</b>\n"
-        text += f" - Ваша ссылка для приглашения друзей: <code>https://t.me/tomatoclanbot?start={message.from_user.id}</code>.\n"
+        text += f" - Ваша ссылка для приглашения друзей: " \
+                f"<code>https://t.me/tomatoclanbot?start={message.from_user.id}</code>.\n"
         text += f" - Ваша позиция в рейтинге: <b>{pos}</b>"
         return await message.answer(text)
     if message.text == 'Топ':
