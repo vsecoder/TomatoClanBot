@@ -79,7 +79,12 @@ async def main():
     except FileExistsError:
         await db.migrate_models(tortoise_config)
 
-    session = AiohttpSession(api=TelegramAPIServer.from_base("https://api.telegram.org", is_local=False))
+    session = AiohttpSession(
+        api=TelegramAPIServer.from_base(
+            "https://api.telegram.org", 
+            is_local=False
+        )
+    )
     token = config.bot.token
     bot_settings = {"session": session, "parse_mode": "HTML"}
 
@@ -93,7 +98,6 @@ async def main():
     registry = DialogRegistry(dp)
 
     context_kwargs = {"config": config, "registry": registry}
-
 
     await dp.start_polling(bot, **context_kwargs)
 

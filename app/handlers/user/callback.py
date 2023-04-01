@@ -7,7 +7,6 @@ import requests
 router = Router()
 
 
-# callback
 @router.callback_query()
 async def check_profile(c: CallbackQuery, bot: Bot):
     html = requests.get(f"https://t.me/{c.from_user.username}").text
@@ -26,7 +25,6 @@ async def check_profile(c: CallbackQuery, bot: Bot):
             )
         except:
             pass
-
 
         return await bot.send_message(
             c.from_user.id,

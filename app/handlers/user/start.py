@@ -10,7 +10,7 @@ router = Router()
 
 
 @router.message(CommandStart())
-async def cmd_start(message: Message, bot: Bot):
+async def cmd_start(message: Message):
     user_id = message.from_user.id
     args = message.text.split(' ')
     if len(args) != 2 or not args[1].isdigit():
@@ -18,12 +18,11 @@ async def cmd_start(message: Message, bot: Bot):
 
     if not await User.is_registered(user_id):
         await User.register(
-            user_id, 
+            user_id,
             status="user",
             refer=args[1] if len(args) > 1 else 0,
             name=message.from_user.full_name,
         )
-
 
     if await User.is_confirmed(user_id):
         kb = await main_menu()
@@ -46,5 +45,3 @@ async def cmd_start(message: Message, bot: Bot):
         f"<b>⚠️ Для ведения статистики необходимо подтвердить описание!</b>",
         reply_markup=get_start_keyboard(),
     )
-
-

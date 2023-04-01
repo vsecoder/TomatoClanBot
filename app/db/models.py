@@ -7,12 +7,10 @@ class User(Model):
     telegram_id = fields.BigIntField()
     name = fields.CharField(max_length=255, default="Unknown")
 
-    # referal system
     refer = fields.BigIntField()
     referals = fields.JSONField(default=[])
     referal_level = fields.IntField(default=0)
 
-    # profile
     balance = fields.IntField(default=0)
     awards = fields.JSONField(default=[])
 
@@ -22,4 +20,3 @@ class User(Model):
 
     status = fields.CharField(max_length=255, default="user")
     is_banned = fields.BooleanField(default=False)
-

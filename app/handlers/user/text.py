@@ -14,7 +14,7 @@ async def text_handler(message: Message, bot: Bot):
         refer = await User.get_data(user.refer)
         if not refer:
             refer = User(id=0, name="Unknown")
-        text = f"🍅 Ваша статистика:\n\n"
+        text = "🍅 Ваша статистика:\n\n"
         text += f" - Вы заразили: <b>{len(user.referals)}</b>\n"
         text += f" - Вас заразили: <a href='tg://user?id={user.refer}'>{refer.name}</a>\n"
         text += f" - Всего заражено: <b>{await User.get_count()}</b>\n"
@@ -29,7 +29,7 @@ async def text_handler(message: Message, bot: Bot):
         return await message.answer(text)
     if message.text == 'Профиль':
         user = await User.get_data(message.from_user.id)
-        text = f"🍅 Ваш профиль:\n\n"
+        text = "🍅 Ваш профиль:\n\n"
         text += f" - Имя: <b>{user.name}</b>\n"
         text += f" - Статус: <b>{user.status}</b>\n"
         text += f" - ID: <code>{user.id}</code>\n"
@@ -38,4 +38,3 @@ async def text_handler(message: Message, bot: Bot):
         text += f" - Реферал: <a href='tg://user?id={user.refer}'>{user.refer}</a>\n"
         text += f" - Вы были заражены: <b>{user.register_date}</b>\n"
         return await message.answer(text)
-

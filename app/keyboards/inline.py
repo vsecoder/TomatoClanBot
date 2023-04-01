@@ -10,6 +10,7 @@ def get_author_keyboard():
     keyboard = InlineKeyboardBuilder(markup=buttons)
     return keyboard.as_markup()
 
+
 def get_start_keyboard():
     buttons = [
         [InlineKeyboardButton(text="Подробнее если не понятно", url="https://telegra.ph/Klan-tomatov-03-30")],

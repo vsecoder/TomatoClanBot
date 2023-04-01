@@ -1,5 +1,6 @@
 from aiogram import types
 
+
 async def main_menu():
     buttons = [
         [

@@ -4,6 +4,7 @@ from aiogram_dialog import Dialog, DialogManager, Window
 from aiogram_dialog.widgets.kbd import Button, Column, Url
 from aiogram_dialog.widgets.text import Const, Format
 
+
 class StartingDialog(StatesGroup):
     greeting = State()
 
