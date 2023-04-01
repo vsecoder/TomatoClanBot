@@ -9,5 +9,5 @@ pyrogram>=2.0.0
 redis
 tgcrypto
 toml
-requests
 tortoise-orm
+requests
