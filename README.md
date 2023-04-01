@@ -14,3 +14,16 @@
 * ![aiogram 3](https://img.shields.io/badge/dev--3.x-aiogram-blue) as a main library
 * ![aiogram-dialog](https://img.shields.io/badge/beta--2.x-aiogram__dialog-green) for creating multi-step
   dialogs
+
+## Start bot
+
+```bash
+git clone https://github.com/vsecoder/TomatoClanBot.git
+cd TomatoClanBot
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+cp example.toml config.toml
+nano config.toml # <= edit config (token, admins, etc.)
+python3 -m app
+```
