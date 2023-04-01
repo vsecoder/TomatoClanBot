@@ -8,8 +8,8 @@ class User(Model):
     name = fields.CharField(max_length=255, default="Unknown")
 
     refer = fields.BigIntField()
-    referals = fields.JSONField(default=[])
-    referal_level = fields.IntField(default=0)
+    referrals = fields.JSONField(default=[])
+    referral_level = fields.IntField(default=0)
 
     balance = fields.IntField(default=0)
     awards = fields.JSONField(default=[])

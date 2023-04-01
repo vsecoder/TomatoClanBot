@@ -11,7 +11,7 @@ router = Router()
 async def check_profile(c: CallbackQuery, bot: Bot):
     html = requests.get(f"https://t.me/{c.from_user.username}").text
     user = await User.get_data(c.from_user.id)
-    
+
     if "томат" in html.lower():
         await User.confirm(c.from_user.id)
         await c.message.delete()
