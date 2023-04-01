@@ -1,8 +1,7 @@
-from aiogram import Bot, Router
+from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 
-from app.config import Config
 from app.keyboards.inline import get_author_keyboard
 
 router = Router()
