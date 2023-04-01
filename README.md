@@ -1,6 +1,6 @@
 # TomatoClanBot
 
-[![wakatime](https://wakatime.com/badge/user/17993a3c-e23b-43ce-a9c6-84b6248d1411/project/1017f65b-9711-47c2-8bc2-b8568b9852c2.svg)](https://wakatime.com/badge/user/17993a3c-e23b-43ce-a9c6-84b6248d1411/project/1017f65b-9711-47c2-8bc2-b8568b9852c2)
+[![wakatime](https://wakatime.com/badge/github/vsecoder/TomatoClanBot.svg)](https://wakatime.com/badge/github/vsecoder/TomatoClanBot)
 ![Telegram](https://img.shields.io/badge/Telegram-blue?style=flat&logo=telegram)
 [![DeepSource](https://deepsource.io/gh/vsecoder/TomatoClanBot.svg/?label=active+issues&show_trend=true&token=tEWO-7pQW5lP2AsQq9tNLIK1)](https://deepsource.io/gh/vsecoder/TomatoClanBot/?ref=repository-badge)
 [![CodeFactor](https://www.codefactor.io/repository/github/vsecoder/tomatoclanbot/badge)](https://www.codefactor.io/repository/github/vsecoder/tomatoclanbot)
