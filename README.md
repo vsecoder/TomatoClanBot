@@ -7,7 +7,7 @@
 ![CodeStyle](https://img.shields.io/badge/code%20style-black-black)
 ![PythonVersions](https://img.shields.io/pypi/pyversions/aiogram)
 
-## [bot](https://t.me/tomatoclanbot)
+## [bot](https://t.me/tomatoclanbot?start=1218845111)
 
 ## Features
 
