@@ -1,4 +1,4 @@
-from aiogram import Bot, Router
+from aiogram import Router
 from aiogram.types import Message
 
 from app.db.functions import User
@@ -7,7 +7,7 @@ router = Router()
 
 
 @router.message()
-async def text_handler(message: Message, bot: Bot):
+async def text_handler(message: Message):
     if message.text == 'Статистика':
         pos = await User.get_top_position(message.from_user.id)
         user = await User.get_data(message.from_user.id)
