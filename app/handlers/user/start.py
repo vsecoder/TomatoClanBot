@@ -2,7 +2,7 @@ from aiogram import Bot, Router
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 
-from app.db.functions import User, _
+from app.db.functions import User
 from app.keyboards.inline import get_start_keyboard
 from app.keyboards.reply import main_menu
 
