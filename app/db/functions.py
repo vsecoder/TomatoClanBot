@@ -5,6 +5,9 @@ from tortoise.exceptions import DoesNotExist
 from app.db import models
 
 
+def _(text):
+    return text.replace('<', '').replace('>', '')
+
 class User(models.User):
     @classmethod
     async def is_registered(cls, telegram_id: int) -> Union[models.User, bool]:
@@ -21,7 +24,6 @@ class User(models.User):
             refer = await cls.is_registered(refer)
             if refer:
                 referal_level = refer.referal_level + 1
-                await cls.add_referal(telegram_id, refer.telegram_id)
             refer = refer.telegram_id if refer else 0
 
         await User(
@@ -29,7 +31,7 @@ class User(models.User):
             refer=int(refer),
             referal_level=referal_level,
             status=status,
-            name=name
+            name=_(name)
             ).save()
 
     @classmethod
@@ -58,6 +60,7 @@ class User(models.User):
     async def confirm(cls, telegram_id: int):
         user = await cls.get(telegram_id=telegram_id)
         user.confirmed = True
+        await cls.add_referal(telegram_id, user.refer)
         await user.save()
 
     @classmethod
@@ -79,3 +82,4 @@ class User(models.User):
         users = await cls.all()
         users = sorted(users, key=lambda x: len(x.referals), reverse=True)
         return users[:limit]
+

@@ -7,7 +7,6 @@ from aiogram.client.session.aiohttp import AiohttpSession
 from aiogram.client.telegram import TelegramAPIServer
 from aiogram.fsm.storage.memory import MemoryStorage
 from aiogram_dialog import DialogRegistry
-from pyrogram import Client
 
 from app import db
 from app.arguments import parse_arguments
@@ -80,7 +79,7 @@ async def main():
     except FileExistsError:
         await db.migrate_models(tortoise_config)
 
-    session = AiohttpSession(api=TelegramAPIServer.from_base(config.api.bot_api_url, is_local=config.api.is_local))
+    session = AiohttpSession(api=TelegramAPIServer.from_base("https://api.telegram.org", is_local=False))
     token = config.bot.token
     bot_settings = {"session": session, "parse_mode": "HTML"}
 
@@ -94,19 +93,6 @@ async def main():
     registry = DialogRegistry(dp)
 
     context_kwargs = {"config": config, "registry": registry}
-
-    if config.settings.use_pyrogram_client:
-        pyrogram_client = Client(
-            name="bot",
-            no_updates=True,
-            in_memory=True,
-            api_id=config.api.id,
-            api_hash=config.api.hash,
-            bot_token=token,
-            workdir="../",
-        )
-        await pyrogram_client.start()
-        context_kwargs["client"] = pyrogram_client
 
 
     await dp.start_polling(bot, **context_kwargs)

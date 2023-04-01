@@ -40,19 +40,7 @@ class ConfigDatabase:
 @dataclass
 class ConfigSettings:
     throttling_rate: float = 0.5
-    use_pyrogram_client: bool = False
     drop_pending_updates: bool = True
-
-
-@dataclass
-class ConfigApi:
-    id: int = 2040
-    hash: str = "b18441a1ff607e10a989891a5462e627"
-    bot_api_url: str = "https://api.telegram.org"
-
-    @property
-    def is_local(self):
-        return self.bot_api_url != "https://api.telegram.org"
 
 
 @dataclass
@@ -60,7 +48,6 @@ class Config:
     bot: ConfigBot
     database: ConfigDatabase
     settings: ConfigSettings
-    api: ConfigApi
 
     @classmethod
     def parse(cls, data: dict) -> "Config":
