@@ -15,7 +15,7 @@ async def text_handler(message: Message, bot: Bot):
         if not refer:
             refer = User(id=0, name="Unknown")
         text = "🍅 Ваша статистика:\n\n"
-        text += f" - Вы заразили: <b>{len(user.referals)}</b>\n"
+        text += f" - Вы заразили: <b>{len(user.referrals)}</b>\n"
         text += f" - Вас заразили: <a href='tg://user?id={user.refer}'>{refer.name}</a>\n"
         text += f" - Всего заражено: <b>{await User.get_count()}</b>\n"
         text += f" - Ваша ссылка для приглашения друзей: " \
@@ -26,7 +26,7 @@ async def text_handler(message: Message, bot: Bot):
         top = await User.get_top()
         text = "🍅 Топ 10:\n\n"
         for i, user in enumerate(top):
-            text += f"{i+1}. <a href='tg://user?id={user.id}'>{user.name}</a> - {len(user.referals)}\n"
+            text += f"{i+1}. <a href='tg://user?id={user.id}'>{user.name}</a> - {len(user.referrals)}\n"
         return await message.answer(text)
     if message.text == 'Профиль':
         user = await User.get_data(message.from_user.id)
@@ -35,7 +35,7 @@ async def text_handler(message: Message, bot: Bot):
         text += f" - Статус: <b>{user.status}</b>\n"
         text += f" - ID: <code>{user.id}</code>\n"
         text += f" - Баланс: <b>{user.balance}</b>\n"
-        text += f" - Рефералов: <b>{len(user.referals)}</b>\n"
+        text += f" - Рефералов: <b>{len(user.referrals)}</b>\n"
         text += f" - Реферал: <a href='tg://user?id={user.refer}'>{user.refer}</a>\n"
         text += f" - Вы были заражены: <b>{user.register_date}</b>\n"
         return await message.answer(text)
