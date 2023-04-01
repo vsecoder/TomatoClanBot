@@ -1,4 +1,5 @@
 from aiogram import Bot, Router
+from aiogram.exceptions import TelegramAPIError
 from aiogram.types import CallbackQuery
 from app.keyboards.reply import main_menu
 from app.db.functions import User, _
@@ -23,7 +24,7 @@ async def check_profile(c: CallbackQuery, bot: Bot):
                 f"🍅 <a href='tg://user?id={c.from_user.id}'>{_(c.from_user.full_name)}</a> заражён(-а) вами!",
                 parse_mode="HTML"
             )
-        except:
+        except TelegramAPIError:
             pass
 
         return await bot.send_message(
