@@ -4,6 +4,8 @@ from aiogram.types import Message
 
 from app.keyboards.inline import get_author_keyboard
 
+from datetime import datetime
+
 router = Router()
 
 
@@ -14,8 +16,14 @@ async def help_handler(message: Message):
 
 
 @router.message(Command(commands=["about"]))
-async def about_handler(message: Message):
+async def about_handler(message: Message, build, upd, start_time):
+    link = 'https://github.com/vsecoder/TomatoClanBot'
+    text = f"🍅 <b>TomatoClanBot</b> - <a href='{link}'>GitHub</a>\n\n"
+    text += f"<b>💫 Version:</b> {upd} #{build[:7]}\n"
+    text += f"<b>⌛️ Uptime:</b> {datetime.now() - start_time}"
+
     await message.answer(
-        "ℹ️ Бот был задуман для развлечения)\nРазработчики и создатели идеи:",
+        text,
         reply_markup=get_author_keyboard(),
+        disable_web_page_preview=True
     )

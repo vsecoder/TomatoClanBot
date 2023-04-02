@@ -11,3 +11,4 @@ tgcrypto
 toml
 tortoise-orm
 requests
+gitpython
