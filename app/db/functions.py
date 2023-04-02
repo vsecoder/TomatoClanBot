@@ -44,7 +44,7 @@ class User(models.User):
     @classmethod
     async def get_count(cls) -> int:
         return await cls.all().count()
-    
+
     @classmethod
     async def get_all(cls) -> list:
         return await cls.all()
