@@ -19,4 +19,6 @@ jobs:
         script: |
           cd TomatoClanBot
           git pull
+          source tomat/bin/activate
+          pip3 install -r requirements.txt
           sudo systemctl restart tomato
