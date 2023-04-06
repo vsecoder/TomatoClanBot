@@ -10,6 +10,9 @@ def _(text):
 
 
 class User(models.User):
+    """
+    User model, contains all methods for working with users.
+    """
     @classmethod
     async def is_registered(cls, telegram_id: int) -> Union[models.User, bool]:
         try:
@@ -99,3 +102,63 @@ class User(models.User):
         users = await cls.all()
         users = sorted(users, key=lambda x: len(x.referrals), reverse=True)
         return users[:limit]
+
+    @classmethod
+    async def get_awards(cls, telegram_id: int) -> list:
+        try:
+            user = await cls.get(telegram_id=telegram_id)
+            return user.awards
+        except DoesNotExist:
+            return []
+
+    @classmethod
+    async def add_balance(cls, telegram_id: int, amount: int):
+        user = await cls.get(telegram_id=telegram_id)
+        user.balance += amount
+        await user.save()
+
+
+class Awards(models.Awards):
+    """
+    Awards is a class for working with awards,
+    which are given to users for referrals.
+    """
+    @classmethod
+    async def get_award_by_count(cls, count: int) -> Union[models.Awards, bool]:
+        try:
+            return await cls.get(count=count)
+        except DoesNotExist:
+            return False
+
+    @classmethod
+    async def get_award_by_name(cls, name: str) -> Union[models.Awards, bool]:
+        try:
+            return await cls.get(name=name)
+        except DoesNotExist:
+            return False
+
+    @classmethod
+    async def add_award(cls, name: str, count: int, text: str, badge: str, award: int):
+        await cls(
+            name=name,
+            count=count,
+            text=text,
+            badge=badge,
+            award=award
+        ).save()
+
+    @classmethod
+    async def check_award(cls, telegram_id: int) -> list:
+        user = await User.get_data(telegram_id)
+        awards = await cls.all()
+        awards = sorted(awards, key=lambda x: x.count, reverse=True)
+
+        res = []
+
+        for award in awards:
+            if len(user.referrals) >= award.count and award.name not in user.awards:
+                user.awards.append(award.name)
+                await user.save()
+                res.append(award)
+
+        return res

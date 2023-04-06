@@ -22,6 +22,7 @@ async def text_handler(message: Message):
         text += f" - Вы заразили: <b>{len(user.referrals)}</b>\n"
         text += f" - Вас заразили: <a href='tg://user?id={user.refer}'>{refer.name}</a>\n"
         text += f" - Всего заражено: <b>{await User.get_count()}</b>\n"
+        text += f" - Вы были заражены: <b>{user.register_date}</b>\n"
         text += f" - Ваша ссылка для приглашения друзей: " \
                 f"<code>https://t.me/tomatoclanbot?start={message.from_user.id}</code>.\n"
         text += f" - Ваша позиция в рейтинге: <b>{pos}</b>"
@@ -39,9 +40,7 @@ async def text_handler(message: Message):
         text = "🍅 Ваш профиль:\n\n"
         text += f" - Имя: <b>{user.name}</b>\n"
         text += f" - Статус: <b>{user.status}</b>\n"
-        text += f" - ID: <code>{user.id}</code>\n"
         text += f" - Баланс: <b>{user.balance}</b>\n"
-        text += f" - Рефералов: <b>{len(user.referrals)}</b>\n"
-        text += f" - Реферал: <a href='tg://user?id={user.refer}'>{user.refer}</a>\n"
-        text += f" - Вы были заражены: <b>{user.register_date}</b>\n"
+        text += f" - Значки: <b>скоро</b>\n"
+        text += f" - Достижения: <b>скоро</b>\n"
         return await message.answer(text)

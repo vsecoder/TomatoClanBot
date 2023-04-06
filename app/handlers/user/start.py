@@ -1,4 +1,4 @@
-from aiogram import Router
+from aiogram import Router, Bot
 from aiogram.filters import CommandStart
 from aiogram.types import Message
 
@@ -11,12 +11,17 @@ from app.filters.is_chat import IsChat
 router = Router()
 
 
-@router.message(CommandStart(), IsChat(is_chat=False))
-async def cmd_start(message: Message):
-    user_id = message.from_user.id
+async def get_args(message: Message) -> list:
     args = message.text.split(' ')
     if len(args) != 2 or not args[1].isdigit():
         args = [None, 0]
+    return args
+
+
+@router.message(CommandStart(), IsChat(is_chat=False))
+async def cmd_start(message: Message, bot: Bot):
+    user_id = message.from_user.id
+    args = await get_args(message)
 
     if not await User.is_registered(user_id):
         await User.register(
