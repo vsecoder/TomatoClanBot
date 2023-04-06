@@ -6,10 +6,12 @@ from app.db.functions import User
 from app.keyboards.inline import get_start_keyboard
 from app.keyboards.reply import main_menu
 
+from app.filters.is_chat import IsChat
+
 router = Router()
 
 
-@router.message(CommandStart())
+@router.message(CommandStart(), IsChat(is_chat=False))
 async def cmd_start(message: Message):
     user_id = message.from_user.id
     args = message.text.split(' ')

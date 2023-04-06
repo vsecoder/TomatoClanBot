@@ -3,17 +3,21 @@ from aiogram.types import Message
 
 from app.db.functions import User
 
+from app.filters.is_chat import IsChat
+
 router = Router()
 
 
-@router.message()
+@router.message(IsChat(is_chat=False))
 async def text_handler(message: Message):
     if message.text == 'Статистика':
         pos = await User.get_top_position(message.from_user.id)
         user = await User.get_data(message.from_user.id)
         refer = await User.get_data(user.refer)
+
         if not refer:
             refer = User(id=0, name="Unknown")
+
         text = "🍅 Ваша статистика:\n\n"
         text += f" - Вы заразили: <b>{len(user.referrals)}</b>\n"
         text += f" - Вас заразили: <a href='tg://user?id={user.refer}'>{refer.name}</a>\n"
@@ -22,12 +26,14 @@ async def text_handler(message: Message):
                 f"<code>https://t.me/tomatoclanbot?start={message.from_user.id}</code>.\n"
         text += f" - Ваша позиция в рейтинге: <b>{pos}</b>"
         return await message.answer(text)
+
     if message.text == 'Топ':
         top = await User.get_top()
         text = "🍅 Топ 10:\n\n"
         for i, user in enumerate(top):
             text += f"{i+1}. <a href='tg://user?id={user.id}'>{user.name}</a> - {len(user.referrals)}\n"
         return await message.answer(text)
+
     if message.text == 'Профиль':
         user = await User.get_data(message.from_user.id)
         text = "🍅 Ваш профиль:\n\n"

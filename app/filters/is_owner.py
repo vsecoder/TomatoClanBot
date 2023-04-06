@@ -10,6 +10,4 @@ class IsOwner(Filter):
 
     async def __call__(self, message: types.Message) -> bool:
         status = await User.get_status(message.from_user.id)
-        if not status:
-            return False
         return status == "admin" if self.is_owner else status != "admin"

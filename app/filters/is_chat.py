@@ -1,0 +1,10 @@
+from aiogram import types
+from aiogram.filters import Filter
+
+
+class IsChat(Filter):
+    def __init__(self, is_chat: bool) -> None:
+        self.is_chat = is_chat
+
+    async def __call__(self, message: types.Message) -> bool:
+        return (message.chat.id != message.from_user.id) if self.is_chat else (message.chat.id == message.from_user.id)

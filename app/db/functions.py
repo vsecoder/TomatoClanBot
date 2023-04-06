@@ -58,14 +58,20 @@ class User(models.User):
 
     @classmethod
     async def add_referral(cls, refer: int, telegram_id: int):
-        user = await cls.get(telegram_id=telegram_id)
-        user.referrals.append(refer)
-        await user.save()
+        try:
+            user = await cls.get(telegram_id=telegram_id)
+            user.referrals.append(refer)
+            await user.save()
+        except DoesNotExist:
+            pass
 
     @classmethod
-    async def get_status(cls, telegram_id: int) -> str:
-        user = await cls.get(telegram_id=telegram_id)
-        return user.status
+    async def get_status(cls, telegram_id: int) -> Union[str, bool]:
+        try:
+            user = await cls.get(telegram_id=telegram_id)
+            return user.status if user else False
+        except DoesNotExist:
+            return False
 
     @classmethod
     async def confirm(cls, telegram_id: int):
