@@ -13,7 +13,7 @@ router = Router()
 
 @router.message(Command(commands=["help"]), IsChat(is_chat=False))
 async def help_handler(message: Message):
-    text = "ℹ️ <b>https://telegra.ph/Klan-tomatov-03-30</b>\n\nЕсли что-то не понятно, пишите @vsecoder"
+    text = "ℹ️ <b>https://telegra.ph/Klan-tomatov-03-30</b>\n\nЕсли что-то непонятно, пишите @vsecoder"
     await message.answer(text)
 
 
