@@ -24,7 +24,7 @@ async def text_handler(message: Message):
         text += f" - Всего заражено: <b>{await User.get_count()}</b>\n"
         text += f" - Вы были заражены: <b>{user.register_date}</b>\n"
         text += f" - Ваша ссылка для приглашения друзей: " \
-                f"<code>https://t.me/tomatoclanbot?start={message.from_user.id}</code>.\n"
+                f"<code>https://t.me/tomatoclanbot?start={message.from_user.id}</code>\n"
         text += f" - Ваша позиция в рейтинге: <b>{pos}</b>"
         return await message.answer(text)
 
