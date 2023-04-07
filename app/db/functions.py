@@ -162,3 +162,7 @@ class Awards(models.Awards):
                 res.append(award)
 
         return res
+
+    @classmethod
+    async def get_all(cls) -> list:
+        return await cls.all()

@@ -1,7 +1,7 @@
 from aiogram import Router
 from aiogram.types import Message
 
-from app.db.functions import User
+from app.db.functions import User, Awards
 
 from app.filters.is_chat import IsChat
 
@@ -37,10 +37,16 @@ async def text_handler(message: Message):
 
     if message.text == 'Профиль':
         user = await User.get_data(message.from_user.id)
+        user_awards = user.awards
+        awards = await Awards.get_all()
+        badges = []
+        for award in awards:
+            if award.name in user_awards:
+                badges.append(award.badge)
         text = "🍅 Ваш профиль:\n\n"
         text += f" - Имя: <b>{user.name}</b>\n"
         text += f" - Статус: <b>{user.status}</b>\n"
         text += f" - Баланс: <b>{user.balance}</b>\n"
-        text += f" - Значки: <b>скоро</b>\n"
-        text += f" - Достижения: <b>скоро</b>\n"
+        text += f" - Значки: <b>{', '.join(badges)}</b>\n"
+        text += f" - Достижения: <b>{len(user_awards)}/{len(awards)}</b>\n"
         return await message.answer(text)
