@@ -45,8 +45,13 @@ class User(models.User):
             ).save()
 
     @classmethod
-    async def get_count(cls) -> int:
-        return await cls.all().count()
+    async def get_count(cls) -> dict:
+        users_count = await cls.all()
+        confirmed = [user for user in users_count if user.confirmed]
+        return {
+            "all": len(users_count),
+            "confirmed": len(confirmed)
+        }
 
     @classmethod
     async def get_all(cls) -> list:

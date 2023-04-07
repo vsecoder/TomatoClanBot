@@ -12,5 +12,5 @@ router = Router()
 async def stats_handler(message: Message):
     count = await User.get_count()
     await message.answer(
-        f"📊 <b>Количество пользователей бота -</b> <code>{count}</code>"
+        f"📊 <b>Количество пользователей бота -</b> <code>{count['confirmed']}/{count['all']}</code>"
     )

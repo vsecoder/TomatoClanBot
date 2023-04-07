@@ -14,6 +14,7 @@ async def text_handler(message: Message):
         pos = await User.get_top_position(message.from_user.id)
         user = await User.get_data(message.from_user.id)
         refer = await User.get_data(user.refer)
+        count = await User.get_count()
 
         if not refer:
             refer = User(id=0, name="Unknown")
@@ -21,7 +22,7 @@ async def text_handler(message: Message):
         text = "🍅 Ваша статистика:\n\n"
         text += f" - Вы заразили: <b>{len(user.referrals)}</b>\n"
         text += f" - Вас заразили: <a href='tg://user?id={user.refer}'>{refer.name}</a>\n"
-        text += f" - Всего заражено: <b>{await User.get_count()}</b>\n"
+        text += f" - Всего заражено: <b>{count['confirmed']}/{count['all']}</b>\n"
         text += f" - Вы были заражены: <b>{user.register_date}</b>\n"
         text += f" - Ваша ссылка для приглашения друзей: " \
                 f"<code>https://t.me/tomatoclanbot?start={message.from_user.id}</code>\n"
