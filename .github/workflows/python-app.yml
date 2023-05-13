@@ -13,7 +13,7 @@ jobs:
     - name: Deploy to remote server
       uses: appleboy/ssh-action@master
       with:
-        host: vsecoder.me
+        host: 130.162.232.190
         username: ubuntu
         password: ${{ secrets.SSH_PASSWORD }}
         script: |
