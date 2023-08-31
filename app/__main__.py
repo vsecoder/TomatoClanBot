@@ -13,19 +13,18 @@ from app.arguments import parse_arguments
 from app.config import Config, parse_config
 from app.db import close_orm, init_orm
 from app.handlers import get_handlers_router
+from app.inline.handlers import get_inline_router
 from app.middlewares import register_middlewares
 from app.commands import remove_bot_commands, setup_bot_commands
 
 from datetime import datetime
 
 
-async def on_startup(
-    dispatcher: Dispatcher, bot: Bot, config: Config
-):
-
+async def on_startup(dispatcher: Dispatcher, bot: Bot, config: Config):
     register_middlewares(dp=dispatcher, config=config)
 
     dispatcher.include_router(get_handlers_router())
+    dispatcher.include_router(get_inline_router())
 
     await setup_bot_commands(bot)
 
@@ -77,10 +76,7 @@ async def main():
         await db.migrate_models(tortoise_config)
 
     session = AiohttpSession(
-        api=TelegramAPIServer.from_base(
-            "https://api.telegram.org",
-            is_local=False
-        )
+        api=TelegramAPIServer.from_base("https://api.telegram.org", is_local=False)
     )
     token = config.bot.token
     bot_settings = {"session": session, "parse_mode": "HTML"}
@@ -99,7 +95,12 @@ async def main():
 
     start_time = datetime.now()
 
-    context_kwargs = {"config": config, "build": build, "upd": upd, "start_time": start_time}
+    context_kwargs = {
+        "config": config,
+        "build": build,
+        "upd": upd,
+        "start_time": start_time,
+    }
 
     await dp.start_polling(bot, **context_kwargs)
 
